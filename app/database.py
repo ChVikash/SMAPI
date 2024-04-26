@@ -4,11 +4,9 @@ from sqlalchemy.orm import sessionmaker, Session
 from sqlalchemy.ext.declarative import declarative_base
 
 
-# cnx = psycopg2.connect(user="sqladminuser", password="Chvik1998post", host="api-sqlserver.postgres.database.azure.com", port=5432, database="fastapi")
-
 from sqlalchemy import create_engine, MetaData, Table
 
-connection_string = 'postgresql://'
+connection_string = 
 
 # Create the engine
 engine = create_engine(connection_string)

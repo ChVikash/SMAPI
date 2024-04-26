@@ -1,31 +1,15 @@
-from typing import Optional
 from fastapi import Body, FastAPI, HTTPException, Response, status, Depends 
-from pydantic import BaseModel
-import pymssql
-import time 
-from . import models
+from . import models, schemas, utils
 from .database import engine, get_db 
 from sqlalchemy.orm import Session
+from typing import List 
 
 
-
-app = FastAPI()
-
-class Post(BaseModel): 
-
-    title : str
-    content : str
-    published : bool = True
 
 models.Base.metadata.create_all(bind = engine)
 
-class Id(BaseModel): 
-    id : int
+app = FastAPI()
 
-server = 'api-sqlserver.database.windows.net'
-database = 'dbapibackend'
-username = 'fastapi'
-password = 'Chvik1998sql'
 
 
 @app.get("/")
@@ -36,7 +20,6 @@ async def root():
 # async def createposts(payLoad: dict = Body(...)):
 #     print(payLoad)
 #     return {"message" : f"user name is {payLoad['User']}  message : post created successfully"}
-
 
 # @app.get("/posts/getpostbyid" )
 # async def getpostbyid(id: Id):
@@ -49,11 +32,10 @@ async def root():
 
 
 
+##################################################################      CREATE       #################################################################################
 
-###########################################################################CREATE#########################################################################################
-
-@app.post("/posts", status_code=status.HTTP_201_CREATED)
-async def createposts(user_post: Post, db:Session = Depends(get_db)):
+@app.post("/posts", status_code=status.HTTP_201_CREATED, response_model= schemas.PostResponse)
+async def createposts(user_post: schemas.PostCreateUpdate, db:Session = Depends(get_db)):
     # insert_query = """
     #                 INSERT INTO posts.allposts (title, content, published) OUTPUT inserted.* VALUES (%s, %s, %s)
     #             """
@@ -71,12 +53,12 @@ async def createposts(user_post: Post, db:Session = Depends(get_db)):
     return row_inserted
 
 ###########################################################################READ##########################################################################################
-@app.get("/posts")
+@app.get("/posts", response_model= List[schemas.PostResponse])
 async def posts(db : Session = Depends(get_db)):
     rows = db.query(models.Post).all()
-    return {"data" : rows}
+    return rows
 
-@app.get("/posts/{id}" )
+@app.get("/posts/{id}", response_model=schemas.PostResponse )
 async def getpostbyid(id: int,db:Session = Depends(get_db)):
     # select_query = """
     #                 SELECT * FROM posts.allposts where id = %d
@@ -94,8 +76,8 @@ async def getpostbyid(id: int,db:Session = Depends(get_db)):
 ########################################################################UPDATE###########################################################################################
 
 
-@app.put("/posts/{id}")
-def updatepostbyid(id: int, post :Post, db:Session = Depends(get_db)):
+@app.put("/posts/{id}", response_model=schemas.PostResponse)
+def updatepostbyid(id: int, post :schemas.PostCreateUpdate, db:Session = Depends(get_db)):
     # update_query = """UPDATE posts.allposts 
     #                     SET title = %s, 
     #                     content = %s, 
@@ -132,3 +114,31 @@ def deleteposts(id:int, db: Session = Depends(get_db)):
     row.delete(synchronize_session=False)
     db.commit()
     return Response(status_code=status.HTTP_204_NO_CONTENT)
+
+#################################################################            USERS               ######################################################
+
+@app.post("/users", status_code=status.HTTP_201_CREATED, response_model=schemas.UserOut)
+async def createuser(user_cred: schemas.UserCreate, db:Session = Depends(get_db)):
+    # insert_query = """
+    #                 INSERT INTO posts.allposts (title, content, published) OUTPUT inserted.* VALUES (%s, %s, %s)
+    #             """
+    # insert_params = (user_post.title, user_post.content, user_post.published)
+    # cursor.execute(insert_query, insert_params)
+    # row_inserted = cursor.fetchone()
+    # conn.commit() 
+    # val = {**(user_post.model_dump())}
+    # print(val)
+    user_cred.password = utils.hash_pass(user_cred.password)
+    user_details = models.User(**(user_cred.model_dump()))
+    db.add(user_details)
+    db.commit()
+    db.refresh(user_details)
+    
+    return user_details
+
+@app.get('/users/{id}', response_model=schemas.UserOut)
+def get_user(id: int, db: Session = Depends(get_db)):
+    user_info = db.query(models.User).filter(models.User.id == id).first()
+    if not user_info : 
+        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail= f"USer with Id: {id}, not found")
+    return user_info
