@@ -110,7 +110,7 @@
                 <mxCell id="124" value="&lt;font style=&quot;font-size: 10px;&quot;&gt;Class&lt;/font&gt;" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;strokeWidth=4;fontSize=24;" parent="1" vertex="1">
                     <mxGeometry x="475" y="460" width="120" height="30" as="geometry"/>
                 </mxCell>
-                <mxCell id="125" value="&lt;font style=&quot;font-size: 14px;&quot;&gt;Adding a new table to the catalog&amp;nbsp;&lt;/font&gt;" style="swimlane;whiteSpace=wrap;html=1;strokeWidth=4;fontSize=10;fillColor=#584b68;" parent="1" vertex="1">
+                <mxCell id="125" value="&lt;font color=&quot;#f7f2f2&quot; style=&quot;font-size: 14px;&quot;&gt;Adding a new table to the catalog&amp;nbsp;&lt;/font&gt;" style="swimlane;whiteSpace=wrap;html=1;strokeWidth=4;fontSize=10;fillColor=#584b68;" parent="1" vertex="1">
                     <mxGeometry x="35" y="670" width="810" height="390" as="geometry">
                         <mxRectangle x="35" y="710" width="270" height="30" as="alternateBounds"/>
                     </mxGeometry>
@@ -127,10 +127,10 @@
                 <mxCell id="132" value="Creates two files&amp;nbsp;" style="edgeLabel;resizable=0;html=1;align=center;verticalAlign=middle;strokeWidth=4;fontSize=14;fillColor=#584b68;" parent="131" connectable="0" vertex="1">
                     <mxGeometry relative="1" as="geometry"/>
                 </mxCell>
-                <mxCell id="133" value="table_config.json" style="shape=note;whiteSpace=wrap;html=1;backgroundOutline=1;darkOpacity=0.05;strokeWidth=1;fontSize=14;fillColor=#584b68;size=20;" parent="125" vertex="1">
+                <mxCell id="133" value="&lt;font color=&quot;#fdf6f6&quot;&gt;table_config.json&lt;/font&gt;" style="shape=note;whiteSpace=wrap;html=1;backgroundOutline=1;darkOpacity=0.05;strokeWidth=1;fontSize=14;fillColor=#584b68;size=20;" parent="125" vertex="1">
                     <mxGeometry x="605" y="90" width="125" height="60" as="geometry"/>
                 </mxCell>
-                <mxCell id="134" value="table_transformation.py" style="shape=note;whiteSpace=wrap;html=1;backgroundOutline=1;darkOpacity=0.05;strokeWidth=1;fontSize=14;fillColor=#584b68;size=17;" parent="125" vertex="1">
+                <mxCell id="134" value="&lt;font color=&quot;#fffafa&quot;&gt;table_transformation.py&lt;/font&gt;" style="shape=note;whiteSpace=wrap;html=1;backgroundOutline=1;darkOpacity=0.05;strokeWidth=1;fontSize=14;fillColor=#584b68;size=17;" parent="125" vertex="1">
                     <mxGeometry x="605" y="180" width="175" height="50" as="geometry"/>
                 </mxCell>
                 <mxCell id="135" value="" style="endArrow=classic;html=1;strokeColor=#8fd6db;strokeWidth=4;fontSize=14;" parent="125" edge="1">
@@ -165,13 +165,13 @@
                 <mxCell id="141" value="&lt;font style=&quot;font-size: 12px;&quot;&gt;Write the logic&lt;/font&gt;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;strokeWidth=4;fontSize=14;" parent="138" vertex="1">
                     <mxGeometry y="78" width="205" height="26" as="geometry"/>
                 </mxCell>
-                <mxCell id="144" value="Ec" style="swimlane;fontStyle=0;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;strokeWidth=1;fontSize=13;fillColor=#584b68;" parent="1" vertex="1">
+                <mxCell id="144" value="&lt;font color=&quot;#f2f2f2&quot;&gt;Ec&lt;/font&gt;" style="swimlane;fontStyle=0;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;strokeWidth=1;fontSize=13;fillColor=#645676;" parent="1" vertex="1">
                     <mxGeometry x="15" y="460" width="170" height="60" as="geometry"/>
                 </mxCell>
                 <mxCell id="145" value="config_table : dict[]" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;whiteSpace=wrap;html=1;strokeWidth=1;fontSize=13;" parent="144" vertex="1">
                     <mxGeometry y="30" width="170" height="30" as="geometry"/>
                 </mxCell>
-                <mxCell id="150" value="EC" style="swimlane;fontStyle=0;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;strokeWidth=1;fontSize=13;fillColor=#584b68;" parent="1" vertex="1">
+                <mxCell id="150" value="&lt;font color=&quot;#f8f7f7&quot;&gt;EC&lt;/font&gt;" style="swimlane;fontStyle=0;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;strokeWidth=1;fontSize=13;fillColor=#584b68;" parent="1" vertex="1">
                     <mxGeometry x="930" y="225" width="140" height="90" as="geometry"/>
                 </mxCell>
                 <mxCell id="151" value="config_table" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;whiteSpace=wrap;html=1;strokeWidth=1;fontSize=13;" parent="150" vertex="1">
@@ -180,7 +180,7 @@
                 <mxCell id="152" value="extracts : [&quot;table1&quot;, &quot;table2&quot;]" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;whiteSpace=wrap;html=1;strokeWidth=1;fontSize=13;" parent="150" vertex="1">
                     <mxGeometry y="60" width="140" height="30" as="geometry"/>
                 </mxCell>
-                <mxCell id="155" value="EC" style="swimlane;fontStyle=0;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;strokeWidth=1;fontSize=13;fillColor=#584b68;" parent="1" vertex="1">
+                <mxCell id="155" value="&lt;font color=&quot;#ffffff&quot;&gt;EC&lt;/font&gt;" style="swimlane;fontStyle=0;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;strokeWidth=1;fontSize=13;fillColor=#584b68;" parent="1" vertex="1">
                     <mxGeometry x="920" y="355" width="140" height="120" as="geometry"/>
                 </mxCell>
                 <mxCell id="156" value="Item 1" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;whiteSpace=wrap;html=1;strokeWidth=1;fontSize=13;" parent="155" vertex="1">
@@ -194,9 +194,6 @@
                 </mxCell>
                 <mxCell id="159" style="edgeStyle=none;html=1;dashed=1;dashPattern=1 1;strokeColor=#8fd6db;strokeWidth=4;fontSize=13;" parent="1" source="17" target="156" edge="1">
                     <mxGeometry relative="1" as="geometry"/>
-                </mxCell>
-                <mxCell id="160" value="&lt;div style=&quot;&quot;&gt;&lt;br&gt;&lt;/div&gt;&lt;div style=&quot;&quot;&gt;df.with(&quot;DOO3&quot;,)&lt;/div&gt;&lt;div style=&quot;&quot;&gt;table1.createorRepl(&lt;/div&gt;&lt;div style=&quot;&quot;&gt;case&amp;nbsp;&lt;/div&gt;&lt;div style=&quot;&quot;&gt;&lt;span style=&quot;background-color: initial;&quot;&gt;as&amp;nbsp;&lt;/span&gt;&lt;/div&gt;&lt;div style=&quot;&quot;&gt;&amp;nbsp;table1 left join table2&amp;nbsp;&lt;/div&gt;" style="rounded=1;whiteSpace=wrap;html=1;strokeWidth=1;fontSize=13;fillColor=#584b68;align=left;" parent="1" vertex="1">
-                    <mxGeometry x="60" y="1160" width="615" height="320" as="geometry"/>
                 </mxCell>
                 <mxCell id="162" style="edgeStyle=none;html=1;dashed=1;dashPattern=1 1;strokeColor=#8fd6db;strokeWidth=4;fontSize=13;" parent="1" source="5" target="144" edge="1">
                     <mxGeometry relative="1" as="geometry"/>
