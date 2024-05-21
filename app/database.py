@@ -1,11 +1,11 @@
-from sqlalchemy import create_engine, Table, MetaData, Column, Integer, String, select, inspect
-from sqlalchemy import create_engine, Table, MetaData, select
-from sqlalchemy.orm import sessionmaker, Session
+from sqlalchemy import create_engine
+from sqlalchemy.orm import sessionmaker
 from sqlalchemy.ext.declarative import declarative_base
+from .config import settings
 
+from sqlalchemy import create_engine
 
-from sqlalchemy import create_engine, MetaData, Table
-
+connection_string = settings.database_conn_str
 
 # Create the engine
 engine = create_engine(connection_string)
@@ -20,10 +20,4 @@ def get_db():
         print("Error yielding the database {e}")
         db.close()
         raise 
-
-
-# # You can test the connection by executing a simple query
-# with engine.connect() as conn:
-#     result = conn.execute("SELECT 'Hello, PostgreSQL!'")
-#     print(result.fetchone()[0])
 

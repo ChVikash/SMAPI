@@ -1,8 +1,6 @@
-from fastapi import Body, FastAPI, HTTPException, Response, status, Depends 
-from . import models, schemas, utils
-from .database import engine, get_db 
-from sqlalchemy.orm import Session
-from typing import List 
+from fastapi import FastAPI
+from . import models
+from .database import engine
 from .routers import posts, users, auth
 
 

@@ -4,12 +4,12 @@ from datetime import datetime, timedelta, UTC
 from . import schemas, database,models
 from fastapi.security import OAuth2PasswordBearer
 from sqlalchemy.orm import Session
-
+from .config import settings
 oauth2_scheme = OAuth2PasswordBearer('login')
 
-SECRET_KEY = "HELLO Learning the JWT key"
-JWT_ALGO = "HS256"
-ACCESS_TOKEN_AUTO_EXPIRE_MINUTES = 3000
+SECRET_KEY = settings.JWT_KEY
+JWT_ALGO = settings.jwt_algo
+ACCESS_TOKEN_AUTO_EXPIRE_MINUTES = settings.JWT_TOKEN_EXPIRE_MINUTES
 
 def create_access_token(data:dict):
     data_copy = data.copy()
