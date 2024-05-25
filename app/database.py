@@ -12,12 +12,12 @@ engine = create_engine(connection_string)
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 Base = declarative_base()
 
+
 def get_db():
     db = SessionLocal()
-    try :
+    try:
         yield db
     except Exception as e:
         print("Error yielding the database {e}")
         db.close()
-        raise 
-
+        raise
