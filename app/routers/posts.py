@@ -3,7 +3,7 @@ from .. import models, schemas,  oauth2
 from ..database import get_db
 from sqlalchemy.orm import Session
 from typing import List, Optional
-
+from sqlalchemy import func
 router = APIRouter(
     prefix="/posts",
     tags=["posts"]
@@ -28,7 +28,7 @@ router = APIRouter(
 ##################################################################      CREATE       #################################################################################
 
 @router.post("/", status_code=status.HTTP_201_CREATED, response_model=schemas.PostResponse)
-async def createposts(db: Session = Depends(get_db),  current_user: models.User = Depends(oauth2.get_current_user)):
+async def createposts(user_post: schemas.PostCreateUpdate, db: Session = Depends(get_db),  current_user: models.User = Depends(oauth2.get_current_user)):
     # insert_query = """
     #                 INSERT INTO posts.allposts (title, content, published) OUTPUT inserted.* VALUES (%s, %s, %s)
     #             """
@@ -38,9 +38,12 @@ async def createposts(db: Session = Depends(get_db),  current_user: models.User 
     # conn.commit()
     # val = {**(user_post.model_dump())}
     # print(val)
+    # print(user_post)
+    # print(current_user)
     row_inserted = models.Post(
         user_id=current_user.id, **(user_post.model_dump()))
-    db.add(row_inserted)
+    # print(row_inserted)
+    # db.add(row_inserted)
     db.commit()
     db.refresh(row_inserted)
 
@@ -49,15 +52,27 @@ async def createposts(db: Session = Depends(get_db),  current_user: models.User 
 #############################################################              READ              ########################################################################
 
 
-@router.get("/", response_model=List[schemas.PostResponse])
+@router.get("/", response_model=List[schemas.PostItemResponse])
 async def posts(db: Session = Depends(get_db), user=Depends(oauth2.get_current_user), limit: int = 15, skip: int = 0, search: Optional[str] = ""):
-    rows = db.query(models.Post).filter(models.Post.title.contains(
-        search)).limit(limit=limit).offset(skip).all()
-    return rows
+    
+    postandvotes = db.query(models.Post, 
+                            func.count(models.Vote.post_id).label("votes")
+                            ).join(
+        models.Vote, 
+        models.Post.id==models.Vote.post_id, 
+        isouter=True
+    ).group_by(
+        models.Post.id
+    ).filter(
+        models.Post.title.contains(
+            search)
+            ).limit(limit=limit).offset(skip).all()
+    return postandvotes
 
 
-@router.get("/{id}", response_model=schemas.PostResponse)
-async def getpostbyid(id: int, db: Session = Depends(get_db), current_user: models.User = Depends(oauth2.get_current_user)):
+@router.get("/{id}", response_model=schemas.PostItemResponse)
+async def getpostbyid(id: int, db: Session = Depends(get_db), 
+                      current_user: models.User = Depends(oauth2.get_current_user)):
     # select_query = """
     #                 SELECT * FROM posts.allposts where id = %d
     #                 """
@@ -65,12 +80,20 @@ async def getpostbyid(id: int, db: Session = Depends(get_db), current_user: mode
     # postbyid = cursor.fetchone()
 
     # all keeps searching even after finding one and we know only one exists
-    postbyid = db.query(models.Post).filter(models.Post.id == id).first()
-    # print(postbyid)
-    if not postbyid:
+
+    postandvote = db.query(models.Post, 
+                            func.count(models.Vote.post_id).label("votes")
+                            ).filter(models.Post.id == id).join(
+        models.Vote, 
+        models.Post.id==models.Vote.post_id, 
+        isouter=True
+    ).group_by(
+        models.Post.id
+    ).first()
+    if not postandvote:
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND,
                             detail=f"Post with Id: {id}, not found")
-    return postbyid
+    return postandvote
 
 
 ######################################################################## UPDATE###########################################################################################

@@ -26,7 +26,7 @@ class PostBase(BaseModel):
     title: str
     content: str
     published: bool = True
-    owner: UserOut
+
 
 
 class PostCreateUpdate(PostBase):
@@ -37,7 +37,15 @@ class PostResponse(PostBase):
     id: int
     created_at: datetime
     user_id: int
+    owner : UserOut
+    class Config:
+        from_attributes = True
+        populate_by_name = True
 
+class PostItemResponse(BaseModel):
+    Post : PostResponse
+    votes : int 
+    
     class Config:
         from_attributes = True
         populate_by_name = True
@@ -51,3 +59,8 @@ class Token(BaseModel):
 class TokenData(BaseModel):
     id: Optional[int] = None
     email: Optional[str] = None
+
+
+class Vote(BaseModel):
+    post_id: int
+    bool : int
